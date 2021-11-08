@@ -1,28 +1,15 @@
-from bs4 import BeautifulSoup
-import requests
-import re
+import sumitup.source.cnn as cnn
+import sumitup.source.bbc as bbc
+import sumitup.nlp.model as model
 
-ROOT_URL = "https://edition.cnn.com"
-BUS_URL = ROOT_URL + "/business"
 
-page = requests.get(BUS_URL)
-soup = BeautifulSoup(page.content, "html.parser")
+source = bbc.BbcNewsSource()
+page_urls = source.get_page_urls()
+page_gen = source.parse_pages(page_urls)
 
-headlines = soup.find_all("h3", class_="cd__headline")
-re_no_videos = re.compile("\/videos\/")
+page = next(page_gen)
 
-for headline in headlines:
-    link = headline.find("a")
+model = model.FrequencySummarizer()
+output = model.run(text=page.body)
 
-    if link["href"].startswith("/"):
-
-        url = ROOT_URL + link["href"]
-
-        if not re_no_videos.findall(url):
-            article_page = requests.get(url)
-            article_soup = BeautifulSoup(article_page.content, "html.parser")
-
-            paragraphs = article_soup.find_all("div", class_="zn-body__paragraph")
-
-            # Find text by looking for h tags
-            # Normal paragraph are straight text in div
+print(output)

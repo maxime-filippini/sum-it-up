@@ -7,6 +7,8 @@ name = "pypi"
 spacy = "*"
 bs4 = "*"
 pre-commit = "*"
+sumitup = {editable = true, path = "."}
+requests-html = "*"
 
 [dev-packages]
 pytest = "*"
