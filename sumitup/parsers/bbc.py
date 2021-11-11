@@ -1,12 +1,12 @@
 # Standard library imports
 import re
 
-# Third party imports
-
-# Local imports
 from .base import ParserBase
 from .loaders import PageLoader
 from sumitup.structures import Article
+
+# Third party imports
+# Local imports
 
 
 class IndexParser(ParserBase):
@@ -22,7 +22,7 @@ class IndexParser(ParserBase):
 
         links = html.find_all("a")
 
-        re_ = re.compile("(\/news)(?!\/live\/).*[0-9]")
+        re_ = re.compile(r"(\/news)(?!\/live\/).*[0-9]")
         out = []
 
         def is_valid_link(link):
@@ -47,7 +47,7 @@ class IndexParser(ParserBase):
             if is_valid_link(link):
                 out.append(self.root_url + href)
 
-        return out
+        return list(set(out))
 
 
 class PageParser(ParserBase):
@@ -69,4 +69,4 @@ class PageParser(ParserBase):
         ]
         body = "\n".join([p.text for p in paragraphs_html if p.text])
 
-        return Article(headline=headline, body=body)
+        return Article(headline=headline, body=body, url=url)

@@ -1,4 +1,5 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
 
 setup(
     name="sumitup",
@@ -10,5 +11,5 @@ setup(
     python_requires=">=3.7, <4",
     install_requires=["scipy", "bs4"],
     extras_require={"dev": ["pytest", "black"]},
-    # entry_points={"console_scripts": []},
+    entry_points={"console_scripts": ["sumitup=sumitup.scripts.main:main"]},
 )

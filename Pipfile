@@ -9,6 +9,10 @@ bs4 = "*"
 pre-commit = "*"
 sumitup = {editable = true, path = "."}
 requests-html = "*"
+notion = "*"
+python-dotenv = "*"
+pyttsx3 = "*"
+gtts = "*"
 
 [dev-packages]
 pytest = "*"

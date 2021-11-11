@@ -130,3 +130,5 @@ dmypy.json
 
 .vscode/settings.json
 .vscode/launch.json
+
+data/*.mp3
