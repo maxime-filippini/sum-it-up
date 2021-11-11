@@ -29,4 +29,5 @@ The CLI is to be used as follows:
     $ sumitup source exporter
 
 Available sources: [bbc_news, cnn_entertainment, cnn_business, cnn_politics]
+
 Available exporters: [notion, tts]
